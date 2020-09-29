@@ -1,0 +1,176 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Statistics</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<link rel="stylesheet" href="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.css">
+	<link rel="icon" href="/Images/favicon.ico" type="image/x-icon"/>
+</head>
+
+<body id="statistics_body">
+	<div class="topnav">
+		<div class="dropdown_container">
+            <a href="index.html">Home</a>
+            <div class="dropdown_menu_container">
+				<div class="dropdown_menu">
+					<a href="essential_info.html" class="dropdown_button">Essential Info</a>
+					<a href="links.html" class="dropdown_button">Edain Community</a>
+					<a href="rules.html" class="dropdown_button">Rules</a>
+				</div>
+            </div>
+        </div><div class="dropdown_container">
+            <a href="ranking.html">Ranking</a>
+			<!--<div class="dropdown_menu_container">
+				<div class="dropdown_menu">
+					<a href="" class="dropdown_button">Ladder</a>
+					<a href="" class="dropdown_button">Tournaments</a>
+				</div>
+			</div>-->
+        </div><div class="dropdown_container">
+            <a href="replay_database.html">Replay Database</a>
+        </div><div class="dropdown_container">
+            <a href="Statistics.html">Statistics</a>
+			<div class="dropdown_menu_container">
+				<div class="dropdown_menu">
+					<a href="Statistics.html" class="dropdown_button">General Statistics</a>
+					<a href="Statistics _Factions.html" class="dropdown_button">Faction Statistics</a>
+				</div>
+			</div>
+        </div><div class="dropdown_container">
+            <a href="upload_menu.html">Upload Replay</a>
+        </div>
+	</div>
+	<div id="user_info_container" >
+		<a class="user_info" id="user_welcome" href="login.html">Welcome! Login here!</a><br>
+		<a class="user_info hidden" id="log_out" href="#" onClick="logOut()">Log out</a>
+	</div>
+	<div id="filters">
+		<h2>Filters</h2>
+		<input name="players" id="filter_players" list="players" placeholder="All players" class="select_small3">
+		<div id="elo_filters"><h3>Winner ELO</h3><br>
+		<input name = "winner_max_elo" type="text" class="input_small4" placeholder="Max Elo"><span>-</span><input name = "winner_min_elo" type="text" class="input_small4" placeholder="Min Elo"><br>
+		<h3>Loser ELO</h3><br>
+		<input name = "loser_max_elo" type="text" class="input_small4" placeholder="Max Elo"><span>-</span><input name = "loser_min_elo" type="text" class="input_small4" placeholder="Min Elo"></div>
+		<select name="maps" id="filter_map" class="select_small3">
+			<option value="true">All Maps</option>
+			<option value="Brandywine">Brandywine</option>
+			<option value="Fords of Isen I">Fords of Isen I</option>
+			<option value="Fords of Isen II">Fords of Isen II</option>
+			<option value="Forelands of Emyn Muil">Forelands of...</option>
+			<option value="Iron Hills">Iron Hills</option>
+			<option value="Morgai">Morgai</option>
+			<option value="Spring of Carnen">Spring of Carnen</option>
+			<option value="The Last Bridge">The Last Bridge</option>
+			<option value="Vastness of Ruhn">Vastness of Ruhn</option>
+			<option value="Westfold">Westfold</option>
+			<option value="Castle">All Castle Maps</option>
+			<option value="Camp">All Camp Maps</option>
+		</select>
+		<select name="host" id="filter_host" class="select_small3">
+			<option value="true">Any Host</option>
+			<option value="Neutral">Neutral</option>
+			<option value="Winner">Winner</option>
+			<option value="Loser">Loser</option>
+		</select>
+		<select name="game_version" id="filter_version" class="select_small3">
+			<option value="true">All Versions</option>
+			<option value="4.5.1">4.5.1</option>
+			<option value="4.5.2">4.5.2</option>
+			<option value="4.5.3">4.5.3</option>
+		</select>
+		<select name="game_event" id="filter_event" class="select_small3">
+			<option value="true">All Events</option>
+			<option value="Ladder">Ladder</option>
+			<option value="BattleZone Cup 2020">BattleZone 2020</option>
+		</select>
+		<select name="winner_random" id="filter_winner_random" class="select_small3">
+			<option value="true">Win Randomness</option>
+			<option value="1">Random Faction</option>
+			<option value="0">Picked Faction</option>
+		</select>
+		<select name="loser_random" id="filter_loser_random" class="select_small3">
+			<option value="true">Lose Randomness</option>
+			<option value="1">Random Faction</option>
+			<option value="0">Picked Faction</option>
+		</select>
+		<datalist id="players">
+		</datalist>
+	</div>
+	<div id="statistics_container">
+		<h2>Faction Winrate</h2>
+		<div class="statistics_pie ct-chart ct-perfect-fourth" id="statistics_winrates"></div>
+		<h2>Maps Played</h2>
+		<div class="statistics_pie ct-chart ct-perfect-fourth" id="statistics_maps"></div>
+		<h2>Host stats</h2>
+		<div class="statistics_pie ct-chart ct-perfect-fourth" id="statistics_host"></div>
+		
+	</div>
+
+<script src="Javascript/amazon-cognito-identity.min.js"></script>  
+<script src="Javascript/cognito_config.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="Javascript/statistics_filter.js"></script>
+<script src="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script>
+<script src="Javascript/chartist.js"></script>
+	
+<script>
+	//Populates datalist with the players registered in the database
+	$( document ).ready(function() {
+    	$.get("https://crehw12bu8.execute-api.eu-central-1.amazonaws.com/Beta/display-players", function(data, status){
+    		var datalist = document.getElementById('players');
+
+			for (var i = 0; i < data.length; i++){
+				if (data[i].Player_Status == "Active") {
+					var row = `<option value="${data[i].Player_Name}"></option>`
+					datalist.innerHTML += row
+				}
+		}
+		});
+	});
+	
+	
+	var data = { 
+		UserPoolId : _config.cognito.userPoolId,
+        ClientId : _config.cognito.clientId
+    };
+    var userPool = new AmazonCognitoIdentity.CognitoUserPool(data);
+    var cognitoUser = userPool.getCurrentUser();
+	console.log(cognitoUser);
+	window.onload = function(){
+    if (cognitoUser != null) {
+        cognitoUser.getSession(function(err, session) {
+            if (err) {
+                alert(err);
+                return;
+            }
+            console.log('session validity: ' + session.isValid());
+			//Set the profile info
+			cognitoUser.getUserAttributes(function(err, result) {
+				if (err) {
+					console.log(err);
+					return;
+				}
+				console.log(result);
+				document.getElementById("user_welcome").innerHTML = 'Welcome, ' + result[2].getValue() + '!';
+				document.getElementById("user_welcome").setAttribute('href', '#');
+				document.getElementById("Upload_Button").setAttribute('href', 'upload_menu.html');
+				document.getElementById("log_out").classList.remove("hidden");
+				document.getElementById("Upload_Button").removeAttribute("onClick");
+			});			
+			
+        });
+    }
+}
+	function logOut(){
+	    if (cognitoUser != null) {
+          cognitoUser.signOut();
+			location.reload();
+        }
+	}
+	function login_request(){
+		alert('Please, login or register to upload replays');
+	}
+	</script>	
+</body>
+</html>

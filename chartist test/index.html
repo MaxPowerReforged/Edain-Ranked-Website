@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>title</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.css">
+    <script src="script.js"></script>
+    <script src="https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script>
+  </head>
+  <body>
+    <h1>Chartist First Test</h1>
+    <div class="ct-chart ct-perfect-fourth"></div>
+    <script>
+      var gondor_label = 'Gondor: 7/14 (50%)';
+      var rohan_label = 'Rohan: 13/22 (59%)';
+      var imladris_label = 'Imladris: 10/16 (63%)';
+      var lothlorien_label = 'Lothlorien: 7/15 (46%)';
+      var dwarves_label = 'Dwarves: 13/27 (49%)';
+      var mordor_label = 'Mordor: 8/18 (44%)';
+      var isengard_label = 'Isengard: 9/18 (50%)';
+      var angmar_label = 'Angmar: 6/13 (46%)';
+      var data = {
+    labels: [gondor_label, rohan_label, imladris_label, lothlorien_label, dwarves_label, mordor_label, isengard_label, angmar_label],
+    series: [50, 59, 63, 46, 55, 44, 50, 46]
+  };
+  
+  var options = {
+    width: 300,
+  height: 200,
+    labelInterpolationFnc: function(value) {
+      return value[0]
+    }
+  };
+  
+  var responsiveOptions = [
+    ['screen and (min-width: 640px)', {
+      chartPadding: 30,
+      labelOffset: 100,
+      labelDirection: 'explode',
+      labelInterpolationFnc: function(value) {
+        return value;
+      }
+    }],
+    ['screen and (min-width: 1024px)', {
+      labelOffset: 50,
+      chartPadding: 20
+    }]
+  ];
+  
+  new Chartist.Pie('.ct-chart', data, options, responsiveOptions);
+    </script>
+  </body>
+</html>

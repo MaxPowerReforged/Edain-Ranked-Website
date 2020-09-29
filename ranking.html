@@ -1,0 +1,147 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Edain Ranking</title>	
+<link rel="stylesheet" type="text/css" href="style.css">
+<link rel="stylesheet" type="text/css" href="style.css">
+<link rel="icon" href="/Images/favicon.ico" type="image/x-icon"/>
+</head>
+
+<body>
+	<div class="topnav">
+		<div class="dropdown_container">
+            <a href="index.html">Home</a>
+            <div class="dropdown_menu_container">
+				<div class="dropdown_menu">
+					<a href="essential_info.html" class="dropdown_button">Essential Info</a>
+					<a href="links.html" class="dropdown_button">Edain Community</a>
+					<a href="rules.html" class="dropdown_button">Rules</a>
+				</div>
+            </div>
+        </div><div class="dropdown_container">
+            <a href="ranking.html">Ranking</a>
+			<!--<div class="dropdown_menu_container">
+				<div class="dropdown_menu">
+					<a href="" class="dropdown_button">Ladder</a>
+					<a href="" class="dropdown_button">Tournaments</a>
+				</div>
+			</div>-->
+        </div><div class="dropdown_container">
+            <a href="replay_database.html">Replay Database</a>
+        </div><div class="dropdown_container">
+            <a href="Statistics.html">Statistics</a>
+			<div class="dropdown_menu_container">
+				<div class="dropdown_menu">
+					<a href="Statistics.html" class="dropdown_button">General Statistics</a>
+					<a href="Statistics _Factions.html" class="dropdown_button">Faction Statistics</a>
+				</div>
+			</div>
+        </div><div class="dropdown_container">
+            <a href="upload_menu.html">Upload Replay</a>
+        </div>
+	</div>
+	<div id="user_info_container" >
+		<a class="user_info" id="user_welcome" href="login.html">Welcome! Login here!</a><br>
+		<a class="user_info hidden" id="log_out" href="#" onClick="logOut()">Log out</a>
+	</div>
+	<h2 id="ranking_title">Ranking</h2>
+	<table id="ranking_table">
+		<tr>
+			<th>No.</th>
+			<th>Player</th>
+			<th>ELO</th>
+			<th>Wins/Losses</th>
+			<th>Games played</th>
+		</tr>
+	</table>
+	
+<script src="Javascript/amazon-cognito-identity.min.js"></script>  
+<script src="Javascript/cognito_config.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	
+<script>
+	var data = { 
+		UserPoolId : _config.cognito.userPoolId,
+        ClientId : _config.cognito.clientId
+    };
+    var userPool = new AmazonCognitoIdentity.CognitoUserPool(data);
+    var cognitoUser = userPool.getCurrentUser();
+	console.log(cognitoUser);
+	window.onload = function(){
+    if (cognitoUser != null) {
+        cognitoUser.getSession(function(err, session) {
+            if (err) {
+                alert(err);
+                return;
+            }
+            console.log('session validity: ' + session.isValid());
+			//Set the profile info
+			cognitoUser.getUserAttributes(function(err, result) {
+				if (err) {
+					console.log(err);
+					return;
+				}
+				console.log(result);
+				document.getElementById("user_welcome").innerHTML = 'Welcome, ' + result[2].getValue() + '!';
+				document.getElementById("user_welcome").setAttribute('href', '#');
+				document.getElementById("Upload_Button").setAttribute('href', 'upload_menu.html');
+				document.getElementById("log_out").classList.remove("hidden");
+				document.getElementById("Upload_Button").removeAttribute("onClick");
+			});			
+			
+        });
+    }
+}
+	function logOut(){
+	    if (cognitoUser != null) {
+          cognitoUser.signOut();
+			location.reload();
+        }
+	}
+	function login_request(){
+		alert('Please, login or register to upload replays');
+	}
+	
+	$( document ).ready(function() {
+    	$.get("https://crehw12bu8.execute-api.eu-central-1.amazonaws.com/Beta/display-ranking", function(data, status){
+    		var table = document.getElementById('ranking_table');
+			var ranking_position = 1;
+
+			for (var i = 0; i < data.length; i++){
+				if (data[i].Player_Status == "Active") {
+					var row = `<tr>
+									<td>${ranking_position}.</td>
+									<td>${data[i].Player_Name}</td>
+									<td>${data[i].Current_ELO}</td>
+									<td>${data[i].Won_Games}/${data[i].Lost_Games}</td>
+									<td>${data[i].Won_Games + data[i].Lost_Games}</td>
+
+							  </tr>`
+					table.innerHTML += row;
+					ranking_position ++;
+				}
+			}
+				
+			for (var i = 0; i < data.length; i++) {
+				if (data[i].Player_Status!= "Active") {
+					var row = `<tr>
+									<td>${ranking_position}.</td>
+									<td>${data[i].Player_Name}</td>
+									<td>${data[i].Player_Status}</td>
+									<td> - / - </td>
+									<td> - </td>
+							  </tr>`
+					table.innerHTML += row;
+					ranking_position++;
+				}
+			}
+				
+					
+
+
+		});
+	});
+	</script>	
+</body>
+</html>

@@ -1,0 +1,51 @@
+/* Pie charts consist of solid slices where you can use this selector to override the default style. */
+.ct-series-a .ct-slice-pie {
+    /* fill of the pie slieces */
+    fill: 	hsl(12, 54%, 69%) !important;
+    /* give your pie slices some outline or separate them visually by using the background color here */
+    stroke: #672211;
+    /* outline width */
+    stroke-width: 1px;
+  }
+
+  .ct-series-b .ct-slice-pie {
+      fill: #D4836F !important;
+      stroke: #672211;
+      stroke-width: 1px;
+  }
+
+  .ct-series-c .ct-slice-pie {
+    fill: #CE715B !important;
+    stroke: #672211;
+    stroke-width: 1px;
+}
+
+.ct-series-d .ct-slice-pie {
+    fill: #C86046 !important;
+    stroke: #672211;
+    stroke-width: 1px;
+}
+
+.ct-series-e .ct-slice-pie {
+    fill: #C24E32 !important;
+    stroke: #672211;
+    stroke-width: 1px;
+}
+
+.ct-series-f .ct-slice-pie {
+    fill: #BC3D1E !important;
+    stroke: #672211;
+    stroke-width: 1px;
+}
+
+.ct-series-g .ct-slice-pie {
+    fill: #AB381C !important;
+    stroke: #672211;
+    stroke-width: 1px;
+}
+
+.ct-series-h .ct-slice-pie {
+    fill: #9A3219 !important;
+    stroke: #672211;
+    stroke-width: 1px;
+}

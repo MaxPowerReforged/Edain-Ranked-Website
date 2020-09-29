@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 22.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Check" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 400 400" style="enable-background:new 0 0 400 400;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:url(#SVGID_1_);}
+	.st1{fill:none;stroke:url(#SVGID_2_);stroke-width:5;stroke-miterlimit:10;}
+	.st2{fill:none;stroke:url(#SVGID_3_);stroke-width:5;stroke-miterlimit:10;}
+	.st3{fill:none;stroke:#7C452E;stroke-width:5;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+	.st4{fill:none;stroke:#AE793F;stroke-width:5;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+	.st5{fill:none;stroke:#9F6A3A;stroke-width:5;stroke-miterlimit:10;}
+</style>
+<g id="Hover">
+	<g>
+		<radialGradient id="SVGID_1_" cx="200" cy="200" r="200" gradientUnits="userSpaceOnUse">
+			<stop  offset="0" style="stop-color:#FCD38D"/>
+			<stop  offset="1" style="stop-color:#4B2916"/>
+		</radialGradient>
+		<polygon class="st0" points="342.9,400 400,342.9 400,57.1 342.9,0 57.1,0 0,57.1 0,342.9 57.1,400 		"/>
+		<linearGradient id="SVGID_2_" gradientUnits="userSpaceOnUse" x1="-2.5" y1="200" x2="402.5" y2="200">
+			<stop  offset="0" style="stop-color:#7C452E"/>
+			<stop  offset="1" style="stop-color:#AE793F"/>
+		</linearGradient>
+		<polygon class="st1" points="342.9,400 400,342.9 400,57.1 342.9,0 57.1,0 0,57.1 0,342.9 57.1,400 		"/>
+		<linearGradient id="SVGID_3_" gradientUnits="userSpaceOnUse" x1="41.25" y1="200" x2="358.75" y2="200">
+			<stop  offset="0" style="stop-color:#7C452E"/>
+			<stop  offset="1" style="stop-color:#AE793F"/>
+		</linearGradient>
+		<polygon class="st2" points="311.6,356.3 356.3,311.6 356.3,88.4 311.6,43.7 88.4,43.7 43.7,88.4 43.7,311.6 88.4,356.3 		"/>
+		<line class="st3" x1="88.4" y1="43.7" x2="57.1" y2="0"/>
+		<line class="st3" x1="43.7" y1="88.4" x2="0" y2="57.1"/>
+		<line class="st3" x1="43.7" y1="311.6" x2="0" y2="342.9"/>
+		<line class="st3" x1="88.4" y1="356.3" x2="57.1" y2="400"/>
+		<line class="st4" x1="311.6" y1="356.3" x2="342.9" y2="400"/>
+		<line class="st4" x1="356.3" y1="311.6" x2="400" y2="342.9"/>
+		<line class="st5" x1="356.3" y1="88.4" x2="400" y2="57.1"/>
+		<line class="st5" x1="311.6" y1="43.7" x2="342.9" y2="0"/>
+	</g>
+</g>
+</svg>

@@ -1,0 +1,74 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Replay Database</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<link rel="icon" href="/Images/favicon.ico" type="image/x-icon"/>
+</head>
+
+<body>
+	<div class="topnav">
+		<div class="dropdown_container">
+            <a href="index.html">Home</a>
+            <div class="dropdown_menu_container">
+				<div class="dropdown_menu">
+					<a href="essential_info.html" class="dropdown_button">Essential Info</a>
+					<a href="links.html" class="dropdown_button">Edain Community</a>
+					<a href="rules.html" class="dropdown_button">Rules</a>
+				</div>
+            </div>
+        </div><div class="dropdown_container">
+            <a href="ranking.html">Ranking</a>
+			<!--<div class="dropdown_menu_container">
+				<div class="dropdown_menu">
+					<a href="" class="dropdown_button">Ladder</a>
+					<a href="" class="dropdown_button">Tournaments</a>
+				</div>
+			</div>-->
+        </div><div class="dropdown_container">
+            <a href="replay_database.html">Replay Database</a>
+        </div><div class="dropdown_container">
+            <a href="Statistics.html">Statistics</a>
+			<div class="dropdown_menu_container">
+				<div class="dropdown_menu">
+					<a href="Statistics.html" class="dropdown_button">General Statistics</a>
+					<a href="Statistics _Factions.html" class="dropdown_button">Faction Statistics</a>
+				</div>
+			</div>
+        </div><div class="dropdown_container">
+            <a href="upload_menu.html">Upload Replay</a>
+        </div>
+	</div>
+	<input type="text" placeholder="search..." id="search_replays">
+	<div id="table_container">
+	<table id="replay_table">
+		<thead>
+		<tr>
+			<th data-column="Replay_Name" data-order="desc">Replay File</th>
+			<th data-column="Winner" data-order="desc">Winner</th>
+			<th data-column="Winner_Faction" data-order="desc">Winner's Faction</th>
+			<th data-column="Loser" data-order="desc">Loser</th>
+			<th data-column="Loser_Faction" data-order="desc">Loser's Faction</th>
+			<th data-column="Host" data-order="desc">Host</th>
+			<th data-column="Map" data-order="desc">Map</th>
+			<th data-column="Game_Version" data-order="desc">Game Version</th>
+			<th data-column="Replay_Event" data-order="desc">Event</th>
+			<th data-column="Game_Date" data-order="desc">Date</th>
+			<th data-column="Game_Description" id="description_colum" data-order="desc">Description</th>
+		</tr>
+		</thead>
+		<tbody id="table_body"></tbody>
+	</table>
+	</div>
+	
+<script src="Javascript/amazon-cognito-identity.min.js"></script>
+<script src="https://sdk.amazonaws.com/js/aws-sdk-2.283.1.min.js"></script>
+<script src="Javascript/cognito_config.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="Javascript/cognito_auth.js"></script>
+<script src="Javascript/build_table.js"></script>
+<script src="Javascript/get_MYSQL_replay_data.js"></script>	
+</body>
+</html>

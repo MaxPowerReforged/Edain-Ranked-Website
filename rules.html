@@ -1,0 +1,158 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Edain Ranking</title>	
+<link rel="stylesheet" type="text/css" href="style.css">
+<link rel="stylesheet" type="text/css" href="style.css">
+<link rel="icon" href="/Images/favicon.ico" type="image/x-icon"/>
+</head>
+
+<body id="links_body">
+	<div class="topnav">
+		<div class="dropdown_container">
+            <a href="index.html">Home</a>
+            <div class="dropdown_menu_container">
+				<div class="dropdown_menu">
+					<a href="essential_info.html" class="dropdown_button">Essential Info</a>
+					<a href="links.html" class="dropdown_button">Edain Community</a>
+					<a href="rules.html" class="dropdown_button">Rules</a>
+				</div>
+            </div>
+        </div><div class="dropdown_container">
+            <a href="ranking.html">Ranking</a>
+			<!--<div class="dropdown_menu_container">
+				<div class="dropdown_menu">
+					<a href="" class="dropdown_button">Ladder</a>
+					<a href="" class="dropdown_button">Tournaments</a>
+				</div>
+			</div>-->
+        </div><div class="dropdown_container">
+            <a href="replay_database.html">Replay Database</a>
+        </div><div class="dropdown_container">
+            <a href="Statistics.html">Statistics</a>
+			<div class="dropdown_menu_container">
+				<div class="dropdown_menu">
+					<a href="Statistics.html" class="dropdown_button">General Statistics</a>
+					<a href="Statistics _Factions.html" class="dropdown_button">Faction Statistics</a>
+				</div>
+			</div>
+        </div><div class="dropdown_container">
+            <a href="upload_menu.html">Upload Replay</a>
+        </div>
+	</div>
+	<div id="user_info_container" >
+		<a class="user_info" id="user_welcome" href="login.html">Welcome! Login here!</a><br>
+		<a class="user_info hidden" id="log_out" href="#" onClick="logOut()">Log out</a>
+	</div>
+	<main id="rules_main">
+		<section id="links_intro">
+			<h1 id="rules_title">Rules</h1>
+			<ul>
+				<li>
+					Games will be played in selected maps from the map pool, 
+					and according to the following rules: 1k start, no ring heros or custom heros, 
+					no Arnor faction, no handicaps. Both random and picking faction are allowed. 
+					Everything else is also allowed ingame, except easter eggs (which are practically 
+					inexistent in our map pool, with some wildman exception :D ).
+				</li>
+				<li>
+					Both players have to agree before the game that they will play ranked. To show that, 
+					put a "Clan tag" (for example: {ER}MaxPower) in the username. Once they agree, they 
+					have to play and accept the result, there is no way to change mind after the game.
+				</li>
+				<li>
+					All players involved need to be registered when submitting the replay, players without 
+					registration cannot participate in the rankings nor the ranked games.
+				</li>
+				<li>
+					Each player starts with 1000 ELO points, which will increase and decrease according to 
+					their victories or loses. The amount of points won/lost depends on the rating of both 
+					players. To update rankings, replays have to be submitted in the website. Each replay has 
+					some data to be filled by the uploader: all information has to be correctly submitted, if 
+					not: small punishment. The replay can be uploaded by any player, but it is recommended that 
+					the uploader is the winner of the game. In any case, the uploader is responsible for 
+					submitting accurate data to the system.
+				</li>
+				<li>
+					Each player can only have 1 account. Please use your known username.
+				</li>
+				<li>
+					Submitting fake replays or cheating in some way (replays where not both players wanted to play 
+					ranked, etc) will be punished.
+				</li>
+				<li>
+					To avoid microcosmos in the ranking (for example, 2-3 friends that only play between themselves 
+					and therefore are not ranked according to the general community, resulting in inaccurate scores), 
+					there will be a maximum of 5 simultaneous replays between the same 2 players allowed. After that, 
+					they cannot keep being ranked by playing each other and have to look for other partners. If even 
+					then we observe creation of microsmos, we will make this rules more strict.
+				</li>
+				<li>
+					For the moment, inactive players will retain their points. This will likely change in the near future, 
+					and also according to your feedback :)
+				</li>
+				<li>
+					Replays will never be deleted unless there was a bug or the information posted was incorrect. Replay 
+					data will be used to generate much needed statistics that need as many replays as possible.
+				</li>
+				<li>
+					IF a game ends in out of sync, or because wildman invasion starts on FoI2, or by other unpredictable 
+					circumstances, the game won't be uploaded, unless both players agree on a clear winner.
+				</li>
+				<li>
+					All rules are subject to changes.
+				</li>
+			</ul>
+		</section>
+	</main>
+	
+<script src="Javascript/amazon-cognito-identity.min.js"></script>  
+<script src="Javascript/cognito_config.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	
+<script>
+	var data = { 
+		UserPoolId : _config.cognito.userPoolId,
+        ClientId : _config.cognito.clientId
+    };
+    var userPool = new AmazonCognitoIdentity.CognitoUserPool(data);
+    var cognitoUser = userPool.getCurrentUser();
+	console.log(cognitoUser);
+	window.onload = function(){
+    if (cognitoUser != null) {
+        cognitoUser.getSession(function(err, session) {
+            if (err) {
+                alert(err);
+                return;
+            }
+            console.log('session validity: ' + session.isValid());
+			//Set the profile info
+			cognitoUser.getUserAttributes(function(err, result) {
+				if (err) {
+					console.log(err);
+					return;
+				}
+				console.log(result);
+				document.getElementById("user_welcome").innerHTML = 'Welcome, ' + result[2].getValue() + '!';
+				document.getElementById("user_welcome").setAttribute('href', '#');
+				document.getElementById("Upload_Button").setAttribute('href', 'upload_menu.html');
+				document.getElementById("log_out").classList.remove("hidden");
+				document.getElementById("Upload_Button").removeAttribute("onClick");
+			});			
+			
+        });
+    }
+}
+	function logOut(){
+	    if (cognitoUser != null) {
+          cognitoUser.signOut();
+			location.reload();
+        }
+	}
+	function login_request(){
+		alert('Please, login or register to upload replays');
+	}
+	</script>	
+</body>
+</html>

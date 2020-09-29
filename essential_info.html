@@ -1,0 +1,187 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Edain Ranking</title>	
+<link rel="stylesheet" type="text/css" href="style.css">
+<link rel="stylesheet" type="text/css" href="style.css">
+<link rel="icon" href="/Images/favicon.ico" type="image/x-icon"/>
+</head>
+
+<body id="essential_info_body">
+	<div class="topnav">
+		<div class="dropdown_container">
+            <a href="index.html">Home</a>
+            <div class="dropdown_menu_container">
+				<div class="dropdown_menu">
+					<a href="essential_info.html" class="dropdown_button">Essential Info</a>
+					<a href="links.html" class="dropdown_button">Edain Community</a>
+					<a href="rules.html" class="dropdown_button">Rules</a>
+				</div>
+            </div>
+        </div><div class="dropdown_container">
+            <a href="ranking.html">Ranking</a>
+			<!--<div class="dropdown_menu_container">
+				<div class="dropdown_menu">
+					<a href="" class="dropdown_button">Ladder</a>
+					<a href="" class="dropdown_button">Tournaments</a>
+				</div>
+			</div>-->
+        </div><div class="dropdown_container">
+            <a href="replay_database.html">Replay Database</a>
+        </div><div class="dropdown_container">
+            <a href="Statistics.html">Statistics</a>
+			<div class="dropdown_menu_container">
+				<div class="dropdown_menu">
+					<a href="Statistics.html" class="dropdown_button">General Statistics</a>
+					<a href="Statistics _Factions.html" class="dropdown_button">Faction Statistics</a>
+				</div>
+			</div>
+        </div><div class="dropdown_container">
+            <a href="upload_menu.html">Upload Replay</a>
+        </div>
+	</div>
+	<div id="user_info_container" >
+		<a class="user_info" id="user_welcome" href="login.html">Welcome! Login here!</a><br>
+		<a class="user_info" id="de_rules" href="https://modding-union.com/index.php/topic,35997.msg477414.html#msg477414">(DE)</a><a class="user_info" id="en_rules" href="https://modding-union.com/index.php/topic,35995.0.html">Check rules (EN)/</a><br>
+		<a class="user_info hidden" id="log_out" href="#" onClick="logOut()">Log out</a>
+	</div>
+	<main id="essential_info_main">
+		<section id="essential_info_intro">
+			<h1 id="essential_info_title">Essential Info</h1>
+			<article>
+				<p>
+					How does Edain Ranked work?<br>
+					Edain Ranked is a ranking system for Edain Mod pvp players, which uses replay submissions
+					to add/remove points to each player. Additionally, each replay submited gets displayed in 
+					the <a href="replay_database.html">Replay Database</a>, where you can download games from 
+					other players to learn their strategies, how the matchups play, the current Meta, etc.
+					From all the replays, we are able to get some <a href="Statistics.html">Statistics</a>, which
+					provide interesting information about balance, player preferences, and other factors.
+				</p>
+			</article>
+		</section>
+		<section id="essential_info_getting_started">
+			<h3>Getting Started</h3>
+			<article>
+				<p>
+					All the website is public, but in order to upload replays you need to register. This is necessary
+					to avoid anonymous players submitting games, which could lead to cheating. You can easily 
+					<a href="register.html">register</a> and start uploading games.
+					<a href="rules.html" target="_blank" class="warning_info">Make sure you read the rules first!</a><br>
+					
+				</p>
+			</article>
+		</section>
+		<section id="essential_info_finding_players">
+			<h3>Finding players</h3>
+			<article>
+				<p>
+					In order to find players, you need to get familiar with BFME's multiplayer scene, which involves
+					3rd party software to work. The most widely used programs are Gameranger and Hamachi, for which
+					many <a href="https://www.gamereplays.org/battleformiddleearth/portals.php?show=page&name=gameranger-guide">
+					guides</a> already exist.<br>
+					As Edain's pvp community is quite small, finding players in Gameranger can get tricky. I strongly suggest
+					to get into <a href="links.html#links_discord">Edain's unnoficial Discord Servers</a>, to get in touch with other players easily,
+					and participate in discussions about the mod, the pvp experience, etc.
+					Take note, that some players prefer not to use the ranking system for various reasons. As stated in 
+					the rules, always ask before the game starts if your opponent wants the game to be uploaded, and use some
+					tag (for example, MaxPow{ER}) to indicate your intent to play ranked games. Otherwise, the game won't be
+					valid and will be removed, and the points reseted.
+				</p>
+			</article>
+		</section>
+		<section id="essential_info_Elo_system">
+			<h3>How does the ranking work?</h3>
+			<article>
+				<p>
+					Edain Ranked is based on an <a href="https://en.wikipedia.org/wiki/Elo_rating_system">ELO system</a>, like Chess.
+					This system takes into account both players' rating in order to calculate a new rating. For example, 
+					losing a game vs a higher ranked opponent will make you lose less points than if you lose against somebody of
+					your level or lower. You will get 1000 ELO points upon register, and start winning/losing as soon as your replay gets submitted.
+				</p>
+			</article>
+		</section>
+		<section id="essential_info_seasons">
+			<h3>Seasons and events</h3>
+			<article>
+				<p>
+					The ladder experience is divided into seasons, each lasting approximately 3 months. At the end of each season,
+					the ranking is saved and displayed, an Edain-related event can take place (such as a tournament, mini-league, showmatches...)
+					and the ladder gets a soft-reset, similar to League of Legends ladder. The exact calculation is: <br><br>
+					((Current ELO - 1000) / 2) + 1000 = Soft Reset ELO <br><br>
+
+					Examples: <br>
+					((950 - 1000) / 2) + 1000 = 975 <br>
+					((1200 - 1000) / 2) + 1000 = 1100 <br>
+				</p>
+			</article>
+		</section>
+		<section id="essential_info_learning">
+			<h3>Improving and learning</h3>
+			<article>
+				<p>
+					Playing a competitive RTS game is always challenging, specially for newcomers. Having your games
+					ranked and losing to other players can be discouraging and lead to loss of motivation. For this reason,
+					a correct mindset is required. First of all, realize that EVERYBODY loses. Even experienced players with
+					years of experience and high understanding of the game lose quite a lot. And they lost even more when they
+					were starting. The difference between a good and a bad player is not the amount of loses, but the way they
+					handle defeat. You will be in a good path if you keep learning from your mistakes and practising the essential 
+					skills needed to succeed. <br>
+					For this purpose, will compile the best guides available in the <a href="links.html">links section</a>.
+				</p>
+			</article>
+		</section>
+		<p>Have fun and enjoy! <br>MaxPow{ER}</p>
+
+	</main>
+	
+<script src="Javascript/amazon-cognito-identity.min.js"></script>  
+<script src="Javascript/cognito_config.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	
+<script>
+	var data = { 
+		UserPoolId : _config.cognito.userPoolId,
+        ClientId : _config.cognito.clientId
+    };
+    var userPool = new AmazonCognitoIdentity.CognitoUserPool(data);
+    var cognitoUser = userPool.getCurrentUser();
+	console.log(cognitoUser);
+	window.onload = function(){
+    if (cognitoUser != null) {
+        cognitoUser.getSession(function(err, session) {
+            if (err) {
+                alert(err);
+                return;
+            }
+            console.log('session validity: ' + session.isValid());
+			//Set the profile info
+			cognitoUser.getUserAttributes(function(err, result) {
+				if (err) {
+					console.log(err);
+					return;
+				}
+				console.log(result);
+				document.getElementById("user_welcome").innerHTML = 'Welcome, ' + result[2].getValue() + '!';
+				document.getElementById("user_welcome").setAttribute('href', '#');
+				document.getElementById("Upload_Button").setAttribute('href', 'upload_menu.html');
+				document.getElementById("log_out").classList.remove("hidden");
+				document.getElementById("Upload_Button").removeAttribute("onClick");
+			});			
+			
+        });
+    }
+}
+	function logOut(){
+	    if (cognitoUser != null) {
+          cognitoUser.signOut();
+			location.reload();
+        }
+	}
+	function login_request(){
+		alert('Please, login or register to upload replays');
+	}
+	</script>	
+</body>
+</html>

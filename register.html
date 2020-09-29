@@ -1,0 +1,97 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Register</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<link rel="icon" href="/Images/favicon.ico" type="image/x-icon"/>
+</head>
+
+<body>
+	<a href="index.html" id="back_main_page">Main Page</a>
+	<form id="register_form" autocomplete="something-new">
+		<h2>register</h2>
+		<input id="username" type="text" class="user_login" name="username" placeholder="username">
+		<input id="email" type="email" class="user_login" name="email" placeholder="e-mail">
+		<input  id="password" type="password" class="user_login" name="password" placeholder="password">
+		<div><input id="register" type="button" name="register">
+			<label for="register" class="small_button" onClick="register()">Register</label>
+		</div>
+		
+		<a class="small_link" href="login.html">Already have an user? Log-in</a>
+	</form>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script src="Javascript/amazon-cognito-auth.min.js"></script>
+	<script src="https://sdk.amazonaws.com/js/aws-sdk-2.7.16.min.js"></script> 
+	<script src="Javascript/amazon-cognito-identity.min.js"></script>  
+	<script src="Javascript/cognito_config.js"></script>
+
+
+	<script type="text/javascript">
+		var username;
+		var password;
+		var personalname;
+		var poolData;
+		
+		function register() { //grabs form elements
+			
+			username = document.getElementById("username").value;
+			email = document.getElementById("email").value;
+			password =  document.getElementById("password").value;
+
+			poolData = {
+					UserPoolId : _config.cognito.userPoolId, // Your user pool id here
+					ClientId : _config.cognito.clientId // Your client id here
+				};
+			
+			var userPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
+
+			var attributeList = [];
+
+			var dataEmail = {
+				Name : 'email', 
+				Value : email, //get from form field
+			};
+		
+			var dataPersonalName = {
+				Name : 'name', 
+				Value : username, //get from form field
+			};
+
+			var attributeEmail = new AmazonCognitoIdentity.CognitoUserAttribute(dataEmail);
+			var attributePersonalName = new AmazonCognitoIdentity.CognitoUserAttribute(dataPersonalName);
+
+
+			attributeList.push(attributeEmail);
+			attributeList.push(attributePersonalName);
+
+			userPool.signUp(username, password, attributeList, null, function(err, result){
+				if (err) {
+					alert(err.message || JSON.stringify(err));
+					return;
+				}
+				cognitoUser = result.user;
+				alert('Register sucess, check your email for account verification, and login!');
+				setTimeout(function(){ 
+				window.location.href = "login.html"; 
+			}, 1500);
+			});
+			var user_data = { username: username };
+			$.ajax({
+			type: "POST",
+			url: "https://crehw12bu8.execute-api.eu-central-1.amazonaws.com/Beta/create-user",
+			data: JSON.stringify(user_data),
+			success: function(){
+				console.log(JSON.stringify(user_data));
+				console.log('data submited!!');
+			},
+			dataType: "json",
+			contentType : "application/json"
+			});
+		};
+	</script>
+	
+</body>
+</html>

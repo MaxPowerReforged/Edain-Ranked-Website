@@ -1,0 +1,179 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Upload Replay</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<link rel="icon" href="/Images/favicon.ico" type="image/x-icon"/>
+</head>
+
+<body>
+	<a href="index.html" id="back_main_page">Main Page</a>
+	<div id="menu">
+		<form id="upload_menu" action="#" method="post">
+			<div id="fila1" class="fila">
+				<h1>Upload Replay</h1>
+			</div>
+			<div id="fila2" class="fila">
+				<input id="Upload_File" type="file" name="replay_file" accept=".BfME2Replay" crossorigin="anonymous" required>
+				<label id="Fake_Upload_Button" class="small_button" for="Upload_File">Browse Files</label>
+				<div id="replay_file"> </div>
+			</div>
+			<div id="fila3" class="fila">
+				<div class="input_small2">				
+					<input id="winner_required" class="input_small3" type="text" name="winner_name" placeholder="Winner" list="players" required>
+				</div><div class="select_small">
+					<select class="select_small2" id="winner_faction_required" name="winner_faction" required>
+						<option value="" selected disabled hidden>Winner Faction</option>
+						<option value="Gondor">Gondor</option>
+						<option value="Rohan">Rohan</option>
+						<option value="Lothlorien">Lothlorien</option>
+						<option value="Imladris">Imladris</option>
+						<option value="Erebor">Erebor</option>
+						<option value="Iron Hills">Iron Hills</option>
+						<option value="Ered Luin">Ered Luin</option>
+						<option value="Mordor">Mordor</option>
+						<option value="Isengard">Isengard</option>
+						<option value="Angmar">Angmar</option>
+					</select>
+				</div><div class="checkbox_small"><label class="checkbox_container">Random<input type="hidden" name="winner_random" value="0" onclick="this.previousSibling.value=1-this.previousSibling.value"><input type="checkbox" name="winner_random" checked="checked" value="1"><span class="checkmark"></span></label></div>
+			</div>
+			<div id="fila4" class="fila">
+				<div class="input_small2"><input id="loser_required" class="input_small3" type="text" name="loser_name" placeholder="Loser" list="players" required>
+				</div><div class="select_small">
+					<select id="loser_faction_required" class="select_small2" name="loser_faction" required>
+						<option value="" selected disabled hidden>Loser Faction</option>
+						<option value="Gondor">Gondor</option>
+						<option value="Rohan">Rohan</option>
+						<option value="Lothlorien">Lothlorien</option>
+						<option value="Imladris">Imladris</option>
+						<option value="Erebor">Erebor</option>
+						<option value="Iron Hills">Iron Hills</option>
+						<option value="Ered Luin">Ered Luin</option>
+						<option value="Mordor">Mordor</option>
+						<option value="Isengard">Isengard</option>
+						<option value="Angmar">Angmar</option>
+					</select>
+				</div><div class="checkbox_small"><label class="checkbox_container">Random<input type="hidden" name="loser_random" value="0" onclick="this.previousSibling.value=1-this.previousSibling.value"><input type="checkbox" name="loser_random" checked="checked" value="1"><span class="checkmark"></span></label></div>
+			</div>
+			<div id="fila5" class="fila">
+				<div class="select_small">
+					<select id="host_required" class="select_small2" name="host" required>
+						<option value="" selected disabled hidden>Host</option>
+						<option>Neutral</option>
+						<option>Winner</option>
+						<option>Loser</option>
+					</select>
+				</div><div class="select_small">
+					<select id="map_required" class="select_small2" name="map" required>
+						<option value="" selected disabled hidden>Map</option>
+						<option value="Brandywine">Brandywine</option>
+						<option value="Fords of Isen I">Fords of Isen I</option>
+						<option value="Fords of Isen II">Fords of Isen II</option>
+						<option value="Forelands of Emyn Muil">Forelands of...</option>
+						<option value="Iron Hills">Iron Hills</option>
+						<option value="Morgai">Morgai</option>
+						<option value="Spring of Carnen">Spring of Carnen</option>
+						<option value="The Last Bridge">The Last Bridge</option>
+						<option value="Vastness of Ruhn">Vastness of Ruhn</option>
+						<option value="Westfold">Westfold</option>
+					</select>
+				</div><div class="select_small">
+					<select id="version_required" class="select_small2" name="game_event" required>
+						<option value="" selected disabled hidden>Game Event</option>
+						<option value="Ladder">Ladder Game</option>
+						<option value="BattleZone Cup 2020">BattleZone Cup 2020</option>
+					</select></div>
+				<input type="hidden" name="game_version" value="4.5.2">
+			</div>
+			<div id="fila6" class="fila">
+				<div id="Description">
+					<textarea name="description" class="input_big" placeholder="Description (optional)"></textarea>
+				</div>
+			</div>
+			<div id="fila7" class="fila">
+				<div id="Upload_Button"><input id="upload_button" type="button" name="submit_replay">
+				<label for="upload_button" class="small_button" id="fake_submit_button">Submit Replay</label></div>
+			</div>
+			<datalist id="players">
+			</datalist>
+		</form>
+	</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://sdk.amazonaws.com/js/aws-sdk-2.283.1.min.js"></script>
+<script src="Javascript/uploadS3.js"></script>
+<script>
+	$(document).ready(function(){
+        $('input[type="file"]').change(function(e){
+            var fileName = e.target.files[0].name;
+            $('#replay_file').html('Selected File: ' + fileName);
+        });
+    });
+	
+	//Fills the Datalist with the registered players in Database
+	$( document ).ready(function() {
+    	$.get("https://crehw12bu8.execute-api.eu-central-1.amazonaws.com/Beta/display-players", function(data, status){
+    		var datalist = document.getElementById('players');
+
+			for (var i = 0; i < data.length; i++){
+				var row = `<option value="${data[i].Player_Name}"></option>`
+				datalist.innerHTML += row
+		}
+		});
+	});
+	
+	$('#fake_submit_button').on('click', function () {
+		var $this = $('#upload_menu')
+	    , viewArr = $this.serializeArray()
+	    , view = {};
+		console.log(viewArr);
+		//selects form elements by id that we required to be filled before submiting
+		var winner_required = document.getElementById('winner_required').value;
+		var winner_faction_required = document.getElementById('winner_faction_required').value;
+		var loser_required = document.getElementById('loser_required').value;
+		var loser_faction_required = document.getElementById('loser_faction_required').value;
+		var host_required = document.getElementById('host_required').value;
+		var map_required = document.getElementById('map_required').value;
+		var version_required = document.getElementById('version_required').value;
+		var files = document.getElementById('Upload_File').files;
+   		if (!files[0]) {
+			alert('Please upload a valid file');
+		} else if (winner_required === "" || 
+			winner_faction_required === "" ||
+			loser_required === "" || 
+			loser_faction_required === "" ||
+			host_required === "" ||
+			map_required === "" ||
+			version_required === ""
+		   ) {
+			alert('Please, fill all the fields before submiting the replay!');
+		} else if (winner_required === loser_required) {
+			alert(winner_required + ' cannot fight against himself! :D');
+		} else { //if everything is filled, submit form
+			$('#fake_submit_button').off('click'); //disables the button to prevent double posting
+			for (var i in viewArr) { //serializes form data to json object, called "view"
+    			view[viewArr[i].name] = viewArr[i].value;
+			}
+			var replay_ID = Date.now() + "-" + files[0].name; //generates unique ID name for replay
+			view.replay_name = replay_ID.substring(14, replay_ID.length-12);
+			view.replay_link = 'https://edain-ranked-replays.s3.eu-central-1.amazonaws.com/' + replay_ID.replace(/ /g, "+");
+			console.log(view);
+			//posts via jquery ajax the json string
+			$.ajax({
+			type: "POST",
+			url: "https://crehw12bu8.execute-api.eu-central-1.amazonaws.com/Beta/submit-replay",
+			data: JSON.stringify(view),
+			success: function(){
+				console.log('data submited!!');
+				//uploads the replay into s3 with the generated name and ID
+				uploadReplay(replay_ID);
+			},
+			dataType: "json"
+			});
+		}	
+	});
+
+</script>
+</body>
+</html>

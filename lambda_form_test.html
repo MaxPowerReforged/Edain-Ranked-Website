@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Log-In</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+	<a href="index.html" id="back_main_page">Main Page</a>
+	<form id="login_form">
+		<h2>log-in</h2>
+		<input class="user_login" type="text" name="username" id="username" placeholder="username" required>
+		<input class="user_login" type="password" name="password" id="password" placeholder="password" required>
+		<div><input id="log_in" type="button" name="log-in">
+			<label for="log_in" class="small_button">Log-In</label>
+		</div>
+		<a class="small_link" href="register.html">New User? Register here</a>
+	</form>
+	
+<script src="Javascript/javascript.js"></script>
+<script src="Javascript/form_handling.js"></script>
+<script src="Javascript/login.js" ></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.1/dist/jquery.validate.js"></script>
+<script>
+	function testsubmit() {
+		$.ajax({
+		  type: "POST",
+		  url: "serverUrl",
+		  data: formData,
+		  success: function(){},
+		  dataType: "json",
+		  contentType : "application/json"
+});
+	}
+</script>
+	
+</body>
+</html>

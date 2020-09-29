@@ -1,0 +1,189 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+	<title>Edain Ranked Homepage</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<link rel="icon" href="/Images/favicon.ico" type="image/x-icon"/>
+<link rel="shortcut icon" href="/Images/favicon.ico" type="image/x-icon"/>
+</head>
+
+<body id="indexBody">
+	<div class="topnav">
+		<div class="dropdown_container">
+            <a href="index.html">Home</a>
+            <div class="dropdown_menu_container">
+				<div class="dropdown_menu">
+					<a href="essential_info.html" class="dropdown_button">Essential Info</a>
+					<a href="links.html" class="dropdown_button">Edain Community</a>
+					<a href="rules.html" class="dropdown_button">Rules</a>
+				</div>
+            </div>
+        </div><div class="dropdown_container">
+            <a href="ranking.html">Ranking</a>
+			<!--<div class="dropdown_menu_container">
+				<div class="dropdown_menu">
+					<a href="" class="dropdown_button">Ladder</a>
+					<a href="" class="dropdown_button">Tournaments</a>
+				</div>
+			</div>-->
+        </div><div class="dropdown_container">
+            <a href="replay_database.html">Replay Database</a>
+        </div><div class="dropdown_container">
+            <a href="Statistics.html">Statistics</a>
+			<div class="dropdown_menu_container">
+				<div class="dropdown_menu">
+					<a href="Statistics.html" class="dropdown_button">General Statistics</a>
+					<a href="Statistics _Factions.html" class="dropdown_button">Faction Statistics</a>
+				</div>
+			</div>
+        </div><div class="dropdown_container">
+            <a href="upload_menu.html">Upload Replay</a>
+        </div>
+	</div>
+	<div id="user_info_container" >
+		<a class="user_info" id="user_welcome" href="login.html">Welcome! Login here!</a><br>
+		<a class="user_info hidden" id="log_out" href="#" onClick="logOut()">Log out</a>
+	</div>
+	
+	<main id="main_index">
+		<section id="top_10_players">
+			<article id="top_players_display">
+				<h3 id="top_players_title">Edain Top 10</h3>
+				<table id="top_10_table"></table>
+			</article>
+		</section>
+		<section id="page_description">
+			<!-- ______________________RING ANIMATION SVG___________________________________________ -->
+			<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" id="background_ring" viewBox="0 0 1250 800" xml:space="preserve">
+			<style type="text/css">
+				.st0{opacity:0.90;clip-path:url(#SVGID_2_);fill:url(#Shadows_1_);}
+			</style>
+			<g id="Ring">
+				
+					<image style="overflow:visible;" width="3377" height="3374" xlink:href="Images/33477C4E.png"  transform="matrix(0.24 0 0 0.24 219.8 -4.88)">
+				</image>
+			<animateTransform attributeName="transform"
+									attributeType="XML"
+									type="rotate"
+									from="0 625 400"
+									to="360 625 400"
+									dur="135s"
+									repeatCount="indefinite"/>
+			</g>
+			<g id="Text">
+				
+					<image style="overflow:visible;" width="1854" height="1268" xlink:href="Images/33477C52.png"  transform="matrix(0.24 0 0 0.24 402.44 247.84)">
+				</image>
+			</g>
+			<!-- <g id="Shadows_cut">
+				<g>
+					<defs>
+						<rect id="SVGID_1_" width="1250" height="800"/>
+					</defs>
+					<clipPath id="SVGID_2_">
+						<use xlink:href="#SVGID_1_"  style="overflow:visible;"/>
+					</clipPath>
+					<linearGradient id="Shadows_1_" gradientUnits="userSpaceOnUse" x1="75.7158" y1="949.2843" x2="1174.2843" y2="-149.2842">
+						<stop  offset="0" style="stop-color:#080707;stop-opacity:0"/>
+						<stop  offset="0.25" style="stop-color:#080707;stop-opacity:0.6"/>
+						<stop  offset="0.5" style="stop-color:#080707;stop-opacity:0"/>
+						<stop  offset="0.75" style="stop-color:#080707;stop-opacity:0.6"/>
+						<stop  offset="1" style="stop-color:#080707;stop-opacity:0"/>
+					</linearGradient>
+					<g><path id="Shadows" class="st0" d="M689.8-374.1H560.2C182.9-343-118-42.1-149.1,335.2v129.6c31.2,377.3,332,678.2,709.4,709.4
+						h129.6c377.3-31.2,678.2-332,709.4-709.4V335.2C1368-42.1,1067.1-343,689.8-374.1z"/>
+					</g>
+				</g>
+			</g> -->
+			</svg>
+			<!-- _________________End of RING ANIMATION SVG___________________________________________ -->
+			<p id="page_description_text">
+				Welcome to Edain Ranked! This page allows players to get a ranking based on their replay submissions.
+				Additionally, we have a public replay database with hundreds of games, and a statistics section with
+				data from all submited replays. If you are a new player looking for some games, consider <a href="register.html">
+				registering</a> and read the <a href="essential_info.html">essential info</a> page.
+			</p>	
+		</section>
+		<section id="latest_news">
+			<article id="news_display">
+				<h3 id="news_title">Latest News</h3>
+				<ul id="news_list">
+					<li class="news_item">Edain Ranked is getting a facelift: The index page has been reworked, and 3 new pages (essential info, edain community and rules) have been added!</li>
+					<li class="news_item">German translation planned</li>
+					<li class="news_item"><a href="https://www.moddb.com/mods/edain-mod" target="_blank">Patch 4.5.3 Released</a></li>
+				</ul>
+			</article>
+		</section>
+
+	</main>
+	
+<script src="Javascript/amazon-cognito-identity.min.js"></script>  
+<script src="Javascript/cognito_config.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	
+<script>
+	var data = { 
+		UserPoolId : _config.cognito.userPoolId,
+        ClientId : _config.cognito.clientId
+    };
+    var userPool = new AmazonCognitoIdentity.CognitoUserPool(data);
+    var cognitoUser = userPool.getCurrentUser();
+	console.log(cognitoUser);
+	window.onload = function(){
+    if (cognitoUser != null) {
+        cognitoUser.getSession(function(err, session) {
+            if (err) {
+                alert(err);
+                return;
+            }
+            console.log('session validity: ' + session.isValid());
+			//Set the profile info
+			cognitoUser.getUserAttributes(function(err, result) {
+				if (err) {
+					console.log(err);
+					return;
+				}
+				console.log(result);
+				document.getElementById("user_welcome").innerHTML = 'Welcome, ' + result[2].getValue() + '!';
+				document.getElementById("user_welcome").setAttribute('href', '#');
+				document.getElementById("Upload_Button").setAttribute('href', 'upload_menu.html');
+				document.getElementById("log_out").classList.remove("hidden");
+				document.getElementById("Upload_Button").removeAttribute("onClick");
+			});			
+			
+        });
+    }
+}
+	function logOut(){
+	    if (cognitoUser != null) {
+          cognitoUser.signOut();
+			location.reload();
+        }
+	}
+	function login_request(){
+		alert('Please, login or register to upload replays');
+	}
+
+	$( document ).ready(function() {
+    	$.get("https://crehw12bu8.execute-api.eu-central-1.amazonaws.com/Beta/display-ranking", function(data, status){
+    		var table = document.getElementById('top_10_table');
+			var ranking_position = 1;
+
+			for (var i = 0; i < data.length; i++){
+				if (data[i].Player_Status == "Active") {
+					var row = `<tr>
+									<td>${ranking_position}.</td>
+									<td>${data[i].Player_Name}</td>
+									<td>${data[i].Current_ELO}</td>
+							  </tr>`
+					table.innerHTML += row;
+					ranking_position ++;
+					if(ranking_position == 11) break;
+				}
+			}
+		})
+	})
+</script>
+</body>
+</html>
